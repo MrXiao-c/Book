@@ -12,8 +12,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class MailUtils {
-	private final static String sender = "709322612@qq.com";
-	private final static String senderVerfirycode = "jhtmvsaizeyxbeef";
+	private final static String sender = "xxxx";
+	private final static String senderVerfirycode = "xxxxx";
 
 	/* public static void main(String[] args) throws Exception */ public static void sendMail(String to, String code)
 			throws Exception {
@@ -23,20 +23,20 @@ public class MailUtils {
 		 */
 
 		Properties properties = System.getProperties();
-		// Á¬½ÓĞ­Òé
+		// è¿æ¥åè®®
 		properties.put("mail.transport.protocol", "smtp");
-		// ÑéÖ¤È¨ÏŞ
+		// éªŒè¯æƒé™
 		properties.put("mail.smtp.auth", "true");
-		// qqÊÇsmtp.qq.com
+		// qqæ˜¯smtp.qq.com
 		properties.put("mail.smtp.host", "smtp.qq.com");
-		// sslÓÊÏä¶Ë¿Ú
+		// sslé‚®ç®±ç«¯å£
 		properties.put("mail.smtp.socketFactory.port", 465);// 465
-		// ÉèÖÃÊÇ·ñÊ¹ÓÃssl°²È«Á¬½Ó
+		// è®¾ç½®æ˜¯å¦ä½¿ç”¨sslå®‰å…¨è¿æ¥
 		properties.put("mail.smtp.starttls.enable", "true");
 
 		Session session = Session.getDefaultInstance(properties, new Authenticator() {
 			public PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(sender, senderVerfirycode); // ·¢¼şÈËÓÊ¼şÓÃ»§Ãû¡¢ÊÚÈ¨Âë
+				return new PasswordAuthentication(sender, senderVerfirycode); // å‘ä»¶äººé‚®ä»¶ç”¨æˆ·åã€æˆæƒç 
 			}
 		});
 
@@ -55,15 +55,15 @@ public class MailUtils {
 		MimeMessage message = new MimeMessage(session);
 		message.setFrom(new InternetAddress(sender));
 		message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
-		message.setSubject("ÕËºÅ¼¤»îÓÊ¼ş");
-		// 2.4ÉèÖÃÓÊ¼şµÄÕıÎÄ,µÚÒ»¸ö²ÎÊıÓÃÓÚÖ¸¶¨·¢ËÍµÄÕıÎÄÄÚÈİ£¬µÚ¶ş¸ö²ÎÊıÓÃÓÚÖ¸¶¨ÕıÎÄµÄÎÄ±¾ÀàĞÍ
+		message.setSubject("è´¦å·æ¿€æ´»é‚®ä»¶");
+		// 2.4è®¾ç½®é‚®ä»¶çš„æ­£æ–‡,ç¬¬ä¸€ä¸ªå‚æ•°ç”¨äºæŒ‡å®šå‘é€çš„æ­£æ–‡å†…å®¹ï¼Œç¬¬äºŒä¸ªå‚æ•°ç”¨äºæŒ‡å®šæ­£æ–‡çš„æ–‡æœ¬ç±»å‹
 		if (code.length() == 6) {
 
-			message.setContent("<h2>ÑéÖ¤Âë£º<h3 style='color:red;'>" + code + "</h3>", "text/html;charset=utf-8");
+			message.setContent("<h2>éªŒè¯ç ï¼š<h3 style='color:red;'>" + code + "</h3>", "text/html;charset=utf-8");
 
 		} else {
 			message.setContent(
-					"<h2>ÕâÊÇÒ»·âTkÍ¼ÊéÕËºÅ×¢²á¼¤»îÓÊ¼ş£¬È·ÈÏ¼¤»îÇëµã»÷ÒÔÏÂ³¬Á´½Ó£º</h2><h3><a href='http://localhost£º8080/Tbook/Check.jsp?code="
+					"<h2>è¿™æ˜¯ä¸€å°Tkå›¾ä¹¦è´¦å·æ³¨å†Œæ¿€æ´»é‚®ä»¶ï¼Œç¡®è®¤æ¿€æ´»è¯·ç‚¹å‡»ä»¥ä¸‹è¶…é“¾æ¥ï¼š</h2><h3><a href='http://localhostï¼š8080/Tbook/Check.jsp?code="
 							+ code + "'>http://localhost:8080/Tbook/Check.jsp?code=" + code + "</a></h3>",
 					"text/html;charset=utf-8");
 		}
